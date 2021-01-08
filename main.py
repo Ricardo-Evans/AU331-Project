@@ -3,6 +3,7 @@ import numpy as np
 import keras
 import pandas as pd
 from sklearn import svm
+import time
 
 
 def main():
@@ -20,7 +21,12 @@ def main():
     x_train, x_test, y_train, y_test = x[:index], x[index:], y[:index], y[index:]
     kernel_function = kernel.kernel(x_train, y_train, 30)
     clf = svm.SVC(kernel=kernel_function)
+
+    a=time.time()
     clf.fit(x_train, y_train.ravel())
+    b=time.time()
+    print("time: ",b-a," seconds")
+
     print("accuracy:", clf.score(x_test, y_test))
 
 
